@@ -60,11 +60,12 @@ class Fixture {
       this.status});
 
   Fixture.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+     id =  int.parse(json['id']==null?'0':json['id'].toString())   ;
+
     referee = json['referee'];
     timezone = json['timezone'];
     date = json['date'];
-    timestamp = json['timestamp'];
+    timestamp = int.parse(json['timestamp']==null?'0':json['timestamp'].toString()) ;
     periods =
         json['periods'] != null ? new Periods.fromJson(json['periods']) : null;
     venue = json['venue'] != null ? new Venue.fromJson(json['venue']) : null;
@@ -99,8 +100,8 @@ class Periods {
   Periods({this.first, this.second});
 
   Periods.fromJson(Map<String, dynamic> json) {
-    first = json['first'];
-    second = json['second'];
+    first =   int.parse(json['first']==null?'0':json['first'].toString()) ;
+    second = int.parse(json['second']==null?'0':json['second'].toString()) ;
   }
 
   Map<String, dynamic> toJson() {
@@ -119,7 +120,7 @@ class Venue {
   Venue({this.id, this.name, this.city});
 
   Venue.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = int.parse(json['id']==null?'0':json['id'].toString()) ;
     name = json['name'];
     city = json['city'];
   }
@@ -143,7 +144,7 @@ class Status {
   Status.fromJson(Map<String, dynamic> json) {
     long = json['long'];
     short = json['short'];
-    elapsed = json['elapsed'];
+    elapsed = int.parse(json['elapsed']==null?'0':json['elapsed'].toString()) ;
   }
 
   Map<String, dynamic> toJson() {
@@ -174,12 +175,12 @@ class League {
       this.round});
 
   League.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+     id =  int.parse(json['id']==null?'0':json['id'].toString())   ;
     name = json['name'];
     country = json['country'];
     logo = json['logo'];
     flag = json['flag'];
-    season = json['season'];
+    season =  int.parse(json['season']==null?'0':json['season'].toString());
     round = json['round'];
   }
 
@@ -228,7 +229,7 @@ class Home {
   Home({this.id, this.name, this.logo, this.winner});
 
   Home.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = int.parse(json['id']==null?'0':json['id'].toString()) ;
     name = json['name'];
     logo = json['logo'];
     winner = json['winner'];
@@ -251,8 +252,8 @@ class Goals {
   Goals({this.home, this.away});
 
   Goals.fromJson(Map<String, dynamic> json) {
-    home = json['home'];
-    away = json['away'];
+    home = int.parse(json['home']==null?'0':json['home'].toString()) ;
+    away = int.parse(json['away']==null?'0':json['away'].toString()) ;
   }
 
   Map<String, dynamic> toJson() {
@@ -303,14 +304,14 @@ class Score {
 }
 
 class Extratime {
-  Null? home;
-  Null? away;
+  int? home;
+  int? away;
 
   Extratime({this.home, this.away});
 
   Extratime.fromJson(Map<String, dynamic> json) {
-    home = json['home'];
-    away = json['away'];
+    home = int.parse(json['home']==null?'0':json['home'].toString());
+    away = int.parse(json['away']==null?'0':json['away'].toString());
   }
 
   Map<String, dynamic> toJson() {
@@ -399,7 +400,7 @@ class Team {
   Team({this.id, this.name, this.logo, this.colors});
 
   Team.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = int.parse(json['id']==null?'0':json['id'].toString()) ;
     name = json['name'];
     logo = json['logo'];
     colors =
@@ -457,7 +458,7 @@ class TeamPlayer {
 
   TeamPlayer.fromJson(Map<String, dynamic> json) {
     primary = json['primary'];
-    number = json['number'];
+    number =  json['number'];
     border = json['border'];
   }
 
@@ -486,10 +487,10 @@ class Player {
  
 
   Player.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = int.parse(json['id']==null?'0':json['id'].toString()) ;
     
     name = json['name'];
-    number = json['number'];
+    number = int.parse(json['number']==null?'0':json['number'].toString()) ;
     
     pos = json['pos'];
     
@@ -537,7 +538,7 @@ class Coach {
   Coach({this.id, this.name, this.photo});
 
   Coach.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = int.parse(json['id']==null?'0':json['id'].toString()) ;
     name = json['name'];
     photo = json['photo'];
   }

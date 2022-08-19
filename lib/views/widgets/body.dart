@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:footballapp/model/footballmatch.dart';
- 
- import 'match.dart';
+  
+import '../../services/api.dart';
+import 'match.dart';
 import 'matchTile.dart';
 
 Widget pageBody(List<FootballMatch> matches) {
@@ -22,7 +23,8 @@ Widget pageBody(List<FootballMatch> matches) {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
               child: Wrap(
                 direction: Axis.horizontal,
                 children: [
@@ -50,18 +52,15 @@ Widget pageBody(List<FootballMatch> matches) {
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold,
                               ),
-
-
                             ),
-
-                                       const SizedBox(height: 30,),
-
+                            const SizedBox(
+                              height: 30,
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                 
                   Center(
                     child: Wrap(
                       direction: Axis.horizontal,
@@ -101,8 +100,8 @@ Widget pageBody(List<FootballMatch> matches) {
                               const SizedBox(
                                 height: 5,
                               ),
-                              Text(
-                                matches[0].fixture!.date!.substring(11,16),
+                              Text("",
+                               // matches[0].fixture!.date!.substring(11, 16),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
@@ -116,7 +115,7 @@ Widget pageBody(List<FootballMatch> matches) {
                           child: Column(
                             children: [
                               Image.network(
-                               matches[0].teams!.away!.logo!,
+                                matches[0].teams!.away!.logo!,
                                 height: 110,
                                 width: 110,
                               ),
@@ -149,7 +148,7 @@ Widget pageBody(List<FootballMatch> matches) {
           width: double.infinity,
           decoration: const BoxDecoration(
             color: Colors.amber,
-            borderRadius:   BorderRadius.only(
+            borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40.0),
               topRight: Radius.circular(40.0),
             ),
@@ -168,19 +167,128 @@ Widget pageBody(List<FootballMatch> matches) {
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: matches.length,
-                    itemBuilder: (context, index) {
-                      return  GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (ctx) =>     MatchDetails(match: matches[index] ))),
-                      child: matchTile(context, matches[index]));
-                    },
+                  child: DefaultTabController(
+                    length: 3,
+                    initialIndex: 0,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
+                        padding: EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                        ),
+                        child: Column(children: <Widget>[
+                          TabBar(
+                            isScrollable: true,
+                            unselectedLabelColor: Colors.black.withOpacity(0.3),
+                            indicatorColor: Colors.black,
+                            tabs: [
+                              const Tab(
+                                child: Text('Live'),
+                              ),
+                              const Tab(
+                                child: Text('Upcoming'),
+                              ),
+                              Tab(
+                                child: Text('Finished'),
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: TabBarView(children: [
+                              FutureBuilder(
+                                future: Api().getAllLiveMatches(),
+                                builder: (context, AsyncSnapshot snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Expanded(
+                                      child: ListView.builder(
+                                        itemCount: matches.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                              onTap: () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (ctx) =>
+                                                          MatchDetails(
+                                                              match: matches[
+                                                                  index]))),
+                                              child: matchTile(
+                                                  context, matches[index]));
+                                        },
+                                      ),
+                                    );
+                                  } else {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+                                },
+                              ),
+                              FutureBuilder(
+                                future: Api().getAllupcommingMatches(),
+                                builder: (context, AsyncSnapshot snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Expanded(
+                                      child: ListView.builder(
+                                        itemCount: matches.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                              onTap: () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (ctx) =>
+                                                          MatchDetails(
+                                                              match: matches[
+                                                                  index]))),
+                                              child: matchTile(
+                                                  context, matches[index]));
+                                        },
+                                      ),
+                                    );
+                                  } else {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+                                },
+                              ),
+                              FutureBuilder(
+                                future: Api().getAllFinishedMatches(),
+                                builder: (context, AsyncSnapshot snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Expanded(
+                                      child: ListView.builder(
+                                        itemCount: matches.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                              onTap: () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (ctx) =>
+                                                          MatchDetails(
+                                                              match: matches[
+                                                                  index]))),
+                                              child: matchTile(
+                                                  context, matches[index]));
+                                        },
+                                      ),
+                                    );
+                                  } else {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+                                },
+                              )
+                            ]),
+                          ),
+                        ]),
+                      ),
+                    ),
                   ),
-                ),
-                
+                )
               ],
             ),
           ),
