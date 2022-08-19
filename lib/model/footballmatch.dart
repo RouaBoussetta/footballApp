@@ -321,4 +321,234 @@ class Extratime {
   }
 }
 
+class Lineup{
+
+  List<Group>? response;
+ Lineup(
+      {this.response});
+Lineup.fromJson(Map<String, dynamic> json) {
+    
+    
+    if (json['response'] != null) {
+      response = <Group>[];
+      json['response'].forEach((v) {
+        response!.add(new Group.fromJson(v));
+      });
+    }
+    
+    
+  }
+
+}
+
+class Group {
+  Team? team;
+  String? formation;
+  List<StartXI>? startXI;
+List<StartXI>? substitutes;
+  Coach? coach;
+
+  Group(
+      {this.team, this.formation, this.startXI, this.substitutes, this.coach});
+
+  Group.fromJson(Map<String, dynamic> json) {
+    team = json['team'] != null ? new Team.fromJson(json['team']) : null;
+    formation = json['formation'];
+    if (json['startXI'] != null) {
+      startXI = <StartXI>[];
+      json['startXI'].forEach((v) {
+        startXI!.add(new StartXI.fromJson(v));
+      });
+    }
+
+        if (json['substitutes'] != null) {
+      substitutes = <StartXI>[];
+      json['substitutes'].forEach((v) {
+        substitutes!.add(new StartXI.fromJson(v));
+      });
+    }
+
+ 
+    
+    coach = json['coach'] != null ? new Coach.fromJson(json['coach']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.team != null) {
+      data['team'] = this.team!.toJson();
+    }
+    data['formation'] = this.formation;
+    if (this.startXI != null) {
+      data['startXI'] = this.startXI!.map((v) => v.toJson()).toList();
+    }
+     
+    if (this.coach != null) {
+      data['coach'] = this.coach!.toJson();
+    }
+    return data;
+  }
+}
+
+class Team {
+  int? id;
+  String? name;
+  String? logo;
+  Colorss? colors;
+
+  Team({this.id, this.name, this.logo, this.colors});
+
+  Team.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    logo = json['logo'];
+    colors =
+        json['colors'] != null ? new Colorss.fromJson(json['colors']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['logo'] = this.logo;
+    if (this.colors != null) {
+      data['colors'] = this.colors!.toJson();
+    }
+    return data;
+  }
+}
+
+class Colorss {
+  TeamPlayer? player;
+  TeamPlayer? goalkeeper;
+
+  Colorss(int i, {this.player, this.goalkeeper});
+
+  Colorss.fromJson(Map<String, dynamic> json) {
+    player =
+        json['player'] != null ? new TeamPlayer.fromJson(json['player']) : null;
+    goalkeeper = json['goalkeeper'] != null
+        ? new TeamPlayer.fromJson(json['goalkeeper'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.player != null) {
+      data['player'] = this.player!.toJson();
+    }
+    if (this.goalkeeper != null) {
+      data['goalkeeper'] = this.goalkeeper!.toJson();
+    }
+    return data;
+  }
+}
+
+class TeamPlayer {
+  String? primary;
+  String? number;
+  String? border;
+
+  TeamPlayer({this.primary, this.number, this.border});
+
+ 
+
+ 
+
+  TeamPlayer.fromJson(Map<String, dynamic> json) {
+    primary = json['primary'];
+    number = json['number'];
+    border = json['border'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['primary'] = this.primary;
+    data['number'] = this.number;
+    data['border'] = this.border;
+    return data;
+  }
+}
+
+
+class Player {
+   
+  int? id;
+  String? name;
+  int? number;
+    String? pos;
+      String? grid;
+
+  Player({this.id, this.name, this.number,this.pos,this.grid});
+
+ 
+
+ 
+
+  Player.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    
+    name = json['name'];
+    number = json['number'];
+    
+    pos = json['pos'];
+    
+    grid = json['grid'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['number'] = this.number;
+    data['name'] = this.name;
+       data['pos'] = this.pos;
+    data['grid'] = this.grid;
+    return data;
+  }
+}
+
+class StartXI {
+  Player? player;
+
+  StartXI({this.player});
+
+  StartXI.fromJson(Map<String, dynamic> json) {
+    player =
+        json['player'] != null ? new Player.fromJson(json['player']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.player != null) {
+      data['player'] = this.player!.toJson();
+    }
+    return data;
+  }
+}
+
+ 
+
+ 
+class Coach {
+  int? id;
+  String? name;
+  String? photo;
+
+  Coach({this.id, this.name, this.photo});
+
+  Coach.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    photo = json['photo'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['photo'] = this.photo;
+    return data;
+  }
+}
+
  

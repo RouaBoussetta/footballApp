@@ -4,20 +4,17 @@ Widget goal(int expandedTime, int homeGoal, int awayGoal) {
   var home = homeGoal;
   var away = awayGoal;
   var elapsed = expandedTime;
-  if (home == null) {
-    home = 0;
-  }
+  if (home == null) home = 0;
   if (away == null) away = 0;
   if (elapsed == null) elapsed = 0;
-  return Expanded(
-    child: Column(
+  return  Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           "$elapsed'",
-          style: const TextStyle(
-            fontSize: 30.0,
+          style: TextStyle(
+            fontSize: 18.0,
           ),
         ),
         Expanded(
@@ -25,13 +22,15 @@ Widget goal(int expandedTime, int homeGoal, int awayGoal) {
             child: Text(
               "$home - $away",
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 36.0,
+              
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25.0,
               ),
             ),
           ),
         )
       ],
-    ),
+    
   );
 }
