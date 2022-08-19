@@ -42,7 +42,7 @@ match.teams!.home!.logo! ,          width: 36.0,
               ),
             ),
             Image.network(
-              "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png",
+              match.teams!.away!.logo!,
               width: 36.0,
             ),
             Expanded(

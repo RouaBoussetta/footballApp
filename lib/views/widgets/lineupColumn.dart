@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../model/footballmatch.dart';
 
@@ -26,13 +27,19 @@ class LineupColumn extends StatelessWidget {
                     direction: Axis.horizontal,
                     children: [
                       Text(
-                        "Players Color : ",
+                        "T-shirt Color : ",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
 
-                      Icon(Icons.ballot,color: Color(int.parse("0xff${team.team!.colors!.player!.primary}")),)
-                    ],
+
+                         ...team.team!.map((Team team) {
+            return                       FaIcon(FontAwesomeIcons.tshirt,color: Color(int.parse("0xff${team.colors!.player!.primary}")));
+
+          }).toList(),
+         
+
+                     ],
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -182,8 +189,7 @@ class LineupColumn extends StatelessWidget {
                             radius: 30,
                             
                           ),
-                  //   backgroundColor: getPosColor(player.pos??' '),
-                ),
+                 ),
                 trailing: CircleAvatar(
                   child: Text(
                     '${player.player!.number ?? ''}',

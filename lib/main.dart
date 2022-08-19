@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footballapp/services/api.dart';
+import 'package:footballapp/views/screens/splashscreen.dart';
 
 import 'model/footballmatch.dart';
 import 'views/widgets/body.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "home": (context) => const Home(),
       },
-      home: const Home(),
+      home: const SplashScreen(),
     );
   }
 }
@@ -34,8 +35,8 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white10,
-          elevation: 0.0,
+          backgroundColor: Colors.black54,
+         
           title: const Text(
             "Home",
             style: TextStyle(color: Colors.black),
@@ -43,7 +44,11 @@ class Home extends StatelessWidget {
           centerTitle: true,
         ),
         body: Column(
+
+
           children: [
+header()
+            /*
             FutureBuilder(
               future: Api().getAllLiveMatches(),
               builder: (context, AsyncSnapshot snapshot) {
@@ -215,23 +220,12 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
+
+            */
           ],
         )
 
-        /* FutureBuilder(
-          future: Api(). getAllMatches(),
-          builder: (context,AsyncSnapshot snapshot) {
-            if (snapshot.hasData) {
-           
-              return pageBody(snapshot.data as List<FootballMatch>);
-            } else {
-              return const Center(
-                child:   CircularProgressIndicator(),
-              );
-            }
-          },
-      
-    )*/
+       
 
         );
   }

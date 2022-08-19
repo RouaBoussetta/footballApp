@@ -1,6 +1,6 @@
 class Constant{
 
-  static const String   API_KEY="7cb233d4cc32271d7b321dfb4dfaf";
+  static const String   API_KEY="606cd8f716be25c216f083130d14cc8b";
 
  
 }

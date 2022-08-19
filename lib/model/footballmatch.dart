@@ -343,7 +343,7 @@ Lineup.fromJson(Map<String, dynamic> json) {
 }
 
 class Group {
-  Team? team;
+  List<Team>? team;
   String? formation;
   List<StartXI>? startXI;
 List<StartXI>? substitutes;
@@ -353,8 +353,16 @@ List<StartXI>? substitutes;
       {this.team, this.formation, this.startXI, this.substitutes, this.coach});
 
   Group.fromJson(Map<String, dynamic> json) {
-    team = json['team'] != null ? new Team.fromJson(json['team']) : null;
-    formation = json['formation'];
+
+          if (json['team'] != null) {
+      team = <Team>[];
+      json['team'].forEach((v) {
+        team!.add(new Team.fromJson(v));
+      });
+    }
+
+
+     formation = json['formation'];
     if (json['startXI'] != null) {
       startXI = <StartXI>[];
       json['startXI'].forEach((v) {
@@ -377,7 +385,7 @@ List<StartXI>? substitutes;
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.team != null) {
-      data['team'] = this.team!.toJson();
+      data['team'] = this.team!.map((v) => v.toJson()).toList();
     }
     data['formation'] = this.formation;
     if (this.startXI != null) {
